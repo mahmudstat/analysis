@@ -51,6 +51,6 @@ dma("Rangpur", col = "#9E9ACA", col2 = "white")
 idm_tidy %>% ggplot(aes(x=region, y=idm, color = "blue", fill=region))+
   geom_boxplot(show.legend = FALSE)+
   labs(x="", y="De Martonne Aridiy Index")+
-  scale_fill_brewer(palette="Paired")
-  
+  scale_fill_brewer(palette="PRGn")
+ggsave("output/idm_box.png", dpi = 300)  
 
