@@ -1,0 +1,4 @@
+* What should be the names of axes?
+* Two graphs? (line and bar?0
+* Title style is modern
+* 
