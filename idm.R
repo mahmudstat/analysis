@@ -54,7 +54,33 @@ idm_tidy %>% ggplot(aes(x=Year, y = idm, color = region, group=1))+
   geom_line(size=0.8, show.legend = F)+
   facet_wrap(~region, nrow=3)+
   labs(y="De Martonne Aridiy Index")+
-  scale_color_brewer(palette="Set1")
+  scale_color_brewer(palette="Set2")
+
+ggsave("output/idm_all_facet.png", dpi = 300)
+
+
+## All lines in same graph
+
+idm_tidy %>% ggplot(aes(Year, idm, color = region))+
+  geom_line(size=0.8)+
+  labs(y="De Martonne Aridiy Index")+
+  scale_color_brewer(palette="Set1")+
+  geom_point()+
+  theme(legend.position = "top")
+
+ggsave("output/idm_all.png", dpi = 300)
+
+## Area Chart
+
+idm_tidy %>% ggplot(aes(Year, idm, fill = region))+
+  geom_area(size=0.8)+
+  labs(y="De Martonne Aridiy Index")+
+  scale_fill_brewer(palette="Paired")+
+  theme(legend.position = "top")
+
+ggsave("output/idm_area.png", dpi = 300)
+
+## Boxplot 
 
 idm_tidy %>% ggplot(aes(x=region, y=idm, color = "blue", fill=region))+
   geom_boxplot(show.legend = FALSE)+
