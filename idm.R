@@ -48,9 +48,19 @@ dma("Dinajpur", col = "#4CB6C7", col2 = "white")
 dma("Ishwardi", col = "#75A9D0", col2 = "white")
 dma("Rangpur", col = "#9E9ACA", col2 = "white")
 
+## All in one plot
+
+idm_tidy %>% ggplot(aes(x=Year, y = idm, color = region, group=1))+
+  geom_line(size=0.8, show.legend = F)+
+  facet_wrap(~region, nrow=3)+
+  labs(y="De Martonne Aridiy Index")+
+  scale_color_brewer(palette="Set1")
+
 idm_tidy %>% ggplot(aes(x=region, y=idm, color = "blue", fill=region))+
   geom_boxplot(show.legend = FALSE)+
   labs(x="", y="De Martonne Aridiy Index")+
   scale_fill_brewer(palette="PRGn")
-ggsave("output/idm_box.png", dpi = 300)  
+ggsave("output/idm_box.png", dpi = 300) 
+
+
 
