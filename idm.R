@@ -26,7 +26,7 @@ dma <- function(r, col, col2){
   idm_tidy %>% filter(region==r) %>% 
     ggplot(aes(x=Year, y = idm, group =1))+
     geom_line(size=0.8, color=col)+
-    labs(y="De Martonne Aridiy Index")
+    labs(y="De Martonne Aridiy Index")+
   geom_smooth(color=col2)
   
   ggsave(filename = paste0("output/idm_",r,".png"), dpi = 300)
@@ -42,4 +42,8 @@ dma <- function(r, col, col2){
 }
 
 dma("Rajshahi", col = "#54C495", col2 = "white")
+dma("Bogura", col = "#3BBFB2", col2 = "white")
+dma("Dinajpur", col = "#4CB6C7", col2 = "white")
+dma("Ishwardi", col = "#75A9D0", col2 = "white")
+dma("Rangpur", col = "#9E9ACA", col2 = "white")
 
