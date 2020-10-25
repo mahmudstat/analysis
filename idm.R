@@ -16,7 +16,7 @@ idm %>% ggplot(aes(x=Year, y = Bogura, group =1))+
 
 idm_tidy %>% filter(region=="Rajshahi") %>% 
   ggplot(aes(x=Year, y = idm))+
-  geom_bar(stat="identity", fill="blue")+
+  geom_bar(stat="identity", fill="blue", width=0.7)+
   labs(y="De Martonne Aridiy Index")+
   geom_smooth(color="white")
 
@@ -34,12 +34,12 @@ dma <- function(r, col, col2){
   ## Bar chart
   idm_tidy %>% filter(region==r) %>% 
     ggplot(aes(x=Year, y = idm))+
-    geom_bar(stat="identity", fill=col)+
+    geom_bar(stat="identity", fill=col, width=0.7)+
     labs(y="De Martonne Aridiy Index")+
     geom_smooth(color=col2)
   
   ggsave(filename = paste0("output/idm_bar_",r,".png"), dpi = 300)
 }
 
-dma("Rajshahi", col = , col2 = "white")
+dma("Rajshahi", col = "#54C495", col2 = "white")
 
