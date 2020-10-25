@@ -1,4 +1,5 @@
 library(tidyverse)
+library(RColorBrewer)
 
 idm <- read_csv("data/idm.csv") 
 
@@ -46,4 +47,10 @@ dma("Bogura", col = "#3BBFB2", col2 = "white")
 dma("Dinajpur", col = "#4CB6C7", col2 = "white")
 dma("Ishwardi", col = "#75A9D0", col2 = "white")
 dma("Rangpur", col = "#9E9ACA", col2 = "white")
+
+idm_tidy %>% ggplot(aes(x=region, y=idm, color = "blue", fill=region))+
+  geom_boxplot(show.legend = FALSE)+
+  labs(x="", y="De Martonne Aridiy Index")+
+  scale_fill_brewer(palette="Paired")
+  
 
