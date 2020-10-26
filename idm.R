@@ -51,10 +51,13 @@ dma("Rangpur", col = "#9E9ACA", col2 = "white")
 ## All in one plot
 
 idm_tidy %>% ggplot(aes(x=Year, y = idm, color = region, group=1))+
-  geom_line(size=0.8, show.legend = F)+
+  geom_smooth(method = "loess", level = 0.99)+
+  geom_line(size=0.8)+
   facet_wrap(~region, nrow=3)+
   labs(y="De Martonne Aridiy Index")+
-  scale_color_brewer(palette="Set2")
+  scale_color_manual(values = c("#CE2FF6", "#710FB0", 
+                               "#4A5FD2", "#4EB00F", "#24116F"))+
+  theme(legend.position = "none")
 
 ggsave("output/idm_all_facet.png", dpi = 300)
 
