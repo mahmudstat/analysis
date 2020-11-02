@@ -89,6 +89,7 @@ spei_avg %>% ggplot(aes(Year, avg, color = Month))+
   geom_line(group=1, size=0.9)+
   facet_wrap(~Month)+
   theme(axis.text.x = element_text(angle = 90), legend.position = "none")+
-  labs(y="Standardized Precipitation Evapotranspiration Index")
+  labs(y="Standardized Precipitation Evapotranspiration Index")+
+  geom_smooth(span = 1000)
 ggsave("spei/spei_avg.png", dpi = 300)
 
