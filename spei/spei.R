@@ -75,3 +75,9 @@ spei_out$Region <- rep(reg, times = 612)
 spei_out %>% ggplot(aes(x=Year, y = WB, color = Region))+
   geom_line(group=1)+
   facet_wrap(~Month)
+
+## Find average spei
+
+spei_avg <- spei_out %>% group_by(Year, Month) %>% 
+  summarise(avg = mean(WB))
+
