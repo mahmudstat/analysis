@@ -81,3 +81,10 @@ spei_out %>% ggplot(aes(x=Year, y = WB, color = Region))+
 spei_avg <- spei_out %>% group_by(Year, Month) %>% 
   summarise(avg = mean(WB))
 
+spei_avg %>% ggplot(aes(Year, avg, color = Month))+
+  geom_line(group=1)+
+  facet_wrap(~Month)
+
+## Lock order
+
+spei_avg$Month <- factor(spei_avg$Month, levels = months)
