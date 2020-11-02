@@ -26,3 +26,35 @@ temp_tidy <- pivot_longer(temp, 3:7, names_to = "region", values_to = "TMED")
 
 temp_tidy$PET <- thornthwaite(temp_tidy$TMED, 
                               lat = 25)
+
+## Read Rainfall data
+
+rain <- read_excel("spei/Rainfall Monthly Merged.xlsx", 13)
+
+rain$Year <- temp$Year
+
+View(rain_tidy)
+
+rain_tidy <- pivot_longer(rain, 3:7, names_to = "region", values_to = "PRCP")
+
+spei_df <- temp_tidy[,c(1,2,5:7)]
+spei_df$PRCP <- rain_tidy$PRCP
+
+## Estimate water balacne (WB)
+
+spei_df$WB <- spei_df$PRCP - spei_df$PET
+
+# Calculate SPEI
+
+# Convert to Time Series
+
+spei_ts <- ts(spei_df[, -c(1,2)], end = c(2016, 12), frequency = 12)
+
+spei12 <- spei(spei_df[, "WB"], 12)
+
+View(spei12$fitted)
+
+View(spei12)
+
+
+
