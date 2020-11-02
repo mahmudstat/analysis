@@ -92,4 +92,7 @@ idm_tidy %>% ggplot(aes(x=region, y=idm, color = "blue", fill=region))+
 ggsave("output/idm_box.png", dpi = 300) 
 
 
+# Change Bogura to Bogra
 
+idm_tidy <- idm_tidy %>% 
+  mutate(region = replace(region, region == "Bogura", "Bogra"))
