@@ -87,6 +87,7 @@ spei_avg$Month <- factor(spei_avg$Month, levels = months)
 
 spei_avg %>% ggplot(aes(Year, avg, color = Month))+
   geom_line(group=1, size=0.9)+
-  facet_wrap(~Month)
+  facet_wrap(~Month)+
+  theme(axis.text.x = element_text(angle = 90), lege)
 
 
