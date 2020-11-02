@@ -57,4 +57,21 @@ View(spei12$fitted)
 View(spei12)
 
 
+spei_out <- data.frame(spei12$fitted)
 
+spei_out$ Year <- rep(1966:2016, 5)
+
+months <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+
+spei_out$Month <- rep(months, each=5*51)
+
+reg <- c("Bogura", "Dinajpr", "Ishwardi", "Rajshahi", "Rangpur")
+
+spei_out$Region <- rep(reg, times = 612)
+
+## Plot
+
+spei_out %>% ggplot(aes(x=Year, y = WB, color = Region))+
+  geom_line(group=1)+
+  facet_wrap(~Month)
