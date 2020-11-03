@@ -4,6 +4,7 @@ install.packages("SPEI")
 library(SPEI)
 library(readxl)
 library(tidyverse)
+library(mice)
 
 # Example
 
@@ -33,7 +34,7 @@ rain <- read_excel("spei/Rainfall Monthly Merged.xlsx", 13)
 
 rain$Year <- temp$Year
 
-View(rain_tidy)
+View(spei_df)
 
 rain_tidy <- pivot_longer(rain, 3:7, names_to = "region", values_to = "PRCP")
 
@@ -85,10 +86,20 @@ spei_avg <- spei_out %>% group_by(Year, Month) %>%
 
 spei_avg$Month <- factor(spei_avg$Month, levels = months)
 
-spei_avg %>% ggplot(aes(Year, avg, color = Month))+
+spei_complete %>% ggplot(aes(Year, avg, color = Month))+
   geom_point()+
   facet_wrap(~Month)+
   theme(axis.text.x = element_text(angle = 90), legend.position = "none")+
   labs(y="Standardized Precipitation Evapotranspiration Index")
-ggsave("spei/spei_avg.png", dpi = 300)
+ggsave("spei/spei_imputed.png", dpi = 300)
 
+## Imputing missing values
+
+spei_impt <- mice(spei_avg)
+summary(spei_impt)
+
+spei_complete <- complete(spei_impt)
+
+## Lock order
+
+spei_complete$Month <- factor(spei_complete$Month, levels = months)
