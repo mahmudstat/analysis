@@ -95,3 +95,14 @@ ggsave("output/idm_box.png", dpi = 300)
 
 idm_tidy <- idm_tidy %>% 
   mutate(region = replace(region, region == "Bogura", "Bogra"))
+
+# Calculate Stationwise Yearly Aridity Index 
+
+aridiy_st <- read_excel("aridity/Aridity Index Calculation.xlsx", sheet = 3)
+
+aridity_tidy <- aridiy_st %>% 
+  pivot_longer(3:7, names_to = "region", values_to = "idm")
+
+aridiy_st_avg <- aridity_tidy %>% 
+  group_by(Year, region) %>% summarise(Mean = mean(idm))
+

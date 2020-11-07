@@ -87,11 +87,11 @@ spei_avg <- spei_out %>% group_by(Year, Month) %>%
 spei_avg$Month <- factor(spei_avg$Month, levels = months)
 
 spei_complete %>% ggplot(aes(Year, avg, color = Month))+
-  geom_point()+
+  geom_point(size=0.8)+
   facet_wrap(~Month)+
   theme(axis.text.x = element_text(angle = 90), legend.position = "none")+
   labs(y="Standardized Precipitation Evapotranspiration Index")
-ggsave("spei/spei_imputed.png", dpi = 300)
+ggsave("spei/spei_imputed_smaller_points.png", dpi = 300)
 
 ## Imputing missing values
 
@@ -103,3 +103,7 @@ spei_complete <- complete(spei_impt)
 ## Lock order
 
 spei_complete$Month <- factor(spei_complete$Month, levels = months)
+
+## Write excel
+
+write_csv(spei_complete, path = "spei/spei.csv")
