@@ -106,3 +106,4 @@ aridity_tidy <- aridiy_st %>%
 aridiy_st_avg <- aridity_tidy %>% 
   group_by(Year, region) %>% summarise(Mean = mean(idm))
 
+write_csv(aridiy_st_avg, path = "aridity/Aridity_Station.csv")
