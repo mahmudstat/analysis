@@ -107,3 +107,19 @@ spei_complete$Month <- factor(spei_complete$Month, levels = months)
 ## Write excel
 
 write_csv(spei_complete, path = "spei/spei.csv")
+
+
+## SPEI values (yearly values stationwise, seperately for 5 stations)
+
+spei_avg_st <- spei_out %>% group_by(Region, Year) %>% 
+  summarise(Year_Avg= mean(WB))
+
+spei_avg_st_impt <- complete(mice(spei_avg_st))
+
+## Wider
+
+spei_wide <- spei_avg_st_impt %>%  pivot_wider(names_from = Region, values_from = Year_Avg)
+
+View(spei_wide)
+
+write_csv(spei_wide, path = "spei/Yearly Stationwise SPEI.csv")
