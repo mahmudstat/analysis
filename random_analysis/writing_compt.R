@@ -14,7 +14,7 @@ writing_rank <- writing_compt %>%  arrange(category) %>%
 
 View(writing_rank)
 
-?write_excel_csv()
+write_excel_csv(writing_rank, "compt2.csv")
 
 
 ## Test 
@@ -33,11 +33,17 @@ iris
 iris %>% arrange(Species, Sepal.Length) %>% 
   group_by(Species) %>% 
   mutate(rank = rank(-Sepal.Length, ties.method = "average")) %>% 
-  arrange(rank)
+  arrange(Species, rank) 
 
-
-# Group by max/min
+## Group by max
 
 iris %>% group_by(Species) %>% 
   summarise(max = max(Sepal.Length))
 
+## Group by top three
+
+iris %>% arrange(desc(Sepal.Length)) %>% 
+  group_by(Species) %>% slice(1:4)
+
+writing_compt %>% arrange(desc(Percentage)) %>% 
+  group_by(category) %>% slice(1:3) %>% View()
