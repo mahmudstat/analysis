@@ -1,0 +1,6 @@
+## Change [] to "" separately
+sed 's/\[//g;s/\]//g' /path/to/file
+
+# Change [] at once, if nothing's inside
+sed 's/[[]]//g' /path/to/file
+
